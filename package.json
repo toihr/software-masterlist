@@ -1,0 +1,27 @@
+{
+  "name": "software-masterlist",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "validate": "tsx scripts/validate.ts",
+    "check": "npm run validate && astro build"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "fuse.js": "^7.5.0",
+    "gray-matter": "^4.0.3",
+    "spdx-expression-parse": "^5.0.0",
+    "spdx-license-list": "^6.12.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "@types/spdx-expression-parse": "^4.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "type": "module",
+  "private": true
+}

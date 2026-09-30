@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryRow from './EntryRow.astro';
+import { type SoftwareEntry, href } from '../lib';
+interface Props { title: string; description?: string; entries: SoftwareEntry[]; filterQuery: string; related?: { label: string; path: string }[] }
+const { title, description, entries, filterQuery, related = [] } = Astro.props;
+---
+<Base title={title} description={description}>
+  <header class="page-head">
+    <h1>{title}</h1>
+    {description && <p>{description}</p>}
+  </header>
+  <div class="results-head">
+    <p>{entries.length} {entries.length === 1 ? 'tool' : 'tools'}</p>
+    <a class="link-button" href={href(`/?${filterQuery}`)}>Search and filter within these</a>
+  </div>
+  <ul class="rows">
+    {entries.map((e) => <EntryRow entry={e} />)}
+  </ul>
+  {related.length > 0 && (
+    <p>
+      Related: {related.map((r, i) => (<>{i > 0 && ', '}<a href={href(r.path)}>{r.label}</a></>))}
+    </p>
+  )}
+</Base>

@@ -1,0 +1,24 @@
+---
+import { type SoftwareEntry, entryHref, href, priceSummary, licenseKind, platformLabel, categoryLabel } from '../lib';
+interface Props { entry: SoftwareEntry }
+const { data } = Astro.props.entry;
+const oss = licenseKind(data.license) === 'open-source';
+---
+<li class="row" data-slug={data.slug}>
+  <div>
+    <h3><a href={entryHref(data.slug)} data-field="name">{data.name}</a></h3>
+    <p class="desc" data-field="description">{data.description}</p>
+  </div>
+  <div class="meta">
+    <strong>{priceSummary(data.pricing)}</strong>
+    {oss ? 'Open source' : 'Proprietary'}{data.self_hostable && ', self-hostable'}
+  </div>
+  <div class="facts">
+    <span>
+      {data.categories.map((c, i) => (
+        <>{i > 0 && ', '}<a href={href(`category/${c}/`)}>{categoryLabel(c)}</a></>
+      ))}
+    </span>
+    <span>{data.platforms.map(platformLabel).join(', ')}</span>
+  </div>
+</li>

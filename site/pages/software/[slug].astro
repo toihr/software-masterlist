@@ -1,0 +1,144 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import {
+  getEntries, type SoftwareEntry, entryHref, href, formatPrice, unitLabel, PRICING_LABEL, licenseKind,
+  platformLabel, categoryLabel, titleFromSlug, backlinks, formatDate, isoDate,
+} from '../../lib';
+import { REPO_URL, BRANCH } from '../../config';
+
+export async function getStaticPaths() {
+  const all = await getEntries();
+  return all.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry, all } }));
+}
+
+interface Props { entry: SoftwareEntry; all: SoftwareEntry[] }
+const { entry, all } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+
+const bySlug = new Map(all.map((e) => [e.data.slug, e]));
+const filePath = entry.filePath ?? '';
+const editUrl = `${REPO_URL}/edit/${BRANCH}/${filePath}`;
+const historyUrl = `${REPO_URL}/commits/${BRANCH}/${filePath}`;
+
+const relationGroups = [
+  { title: 'Alternative to', slugs: d.relations.alternatives_to },
+  { title: 'Listed as an alternative by', slugs: backlinks(all, d.slug, 'alternatives_to').map((e) => e.data.slug).filter((s) => !d.relations.alternatives_to.includes(s)) },
+  { title: 'Integrates with', slugs: d.relations.integrates_with },
+  { title: 'Integrated by', slugs: backlinks(all, d.slug, 'integrates_with').map((e) => e.data.slug) },
+  { title: 'Fork of', slugs: d.relations.fork_of ? [d.relations.fork_of] : [] },
+  { title: 'Forks', slugs: backlinks(all, d.slug, 'fork_of').map((e) => e.data.slug) },
+].filter((g) => g.slugs.length);
+
+const oss = licenseKind(d.license) === 'open-source';
+const TELEMETRY: Record<string, string> = { none: 'None', 'opt-in': 'Opt-in', 'opt-out': 'On by default, can be turned off', mandatory: 'Always on' };
+const LOCATION: Record<string, string> = { local: 'On your device', 'self-chosen': 'Wherever you host it', EU: 'EU', US: 'US', global: 'Worldwide' };
+const MAINTAINED: Record<string, string> = { active: 'Active', slow: 'Slow', 'feature-complete': 'Feature-complete', abandoned: 'Abandoned', discontinued: 'Discontinued' };
+const p = d.pricing;
+---
+<Base title={d.name} description={d.description}>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={href('/')}>All software</a></nav>
+
+  <header class="entry-head">
+    <h1>{d.name}</h1>
+    <p class="lede">{d.description}</p>
+    <div class="entry-links">
+      <a href={d.website} rel="noopener">Website</a>
+      {d.repo && <a href={d.repo} rel="noopener">Source code</a>}
+      <a href={editUrl}>Edit this entry</a>
+    </div>
+  </header>
+
+  <div class="entry-grid">
+    <div>
+      <section class="pricing" aria-labelledby="pricing-title">
+        <h2 id="pricing-title">Pricing</h2>
+        {p.tiers.length > 0 ? (
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">Limits and notes</th></tr></thead>
+              <tbody>
+                {p.tiers.map((t) => (
+                  <tr>
+                    <th scope="row">{t.name}</th>
+                    <td class="price">
+                      {t.prices ? t.prices.map((pr) => (
+                        <div>{formatPrice(pr, p.currency)} {pr.amount > 0 && unitLabel(t.unit) && <span class="unit">{unitLabel(t.unit)}</span>}</div>
+                      )) : <div>On request</div>}
+                    </td>
+                    <td>{[t.limits, t.notes].filter(Boolean).join('. ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p>{PRICING_LABEL[p.model]}{p.model === 'free' && ', no paid plans.'}</p>
+        )}
+        <div class="pricing-meta">
+          <span class="checked" data-checked={isoDate(p.checked)}>Checked {formatDate(p.checked)}</span>
+          {p.currency && <span>{p.vat_included ? 'Prices include VAT' : 'Prices exclude VAT'}{p.region && ` (${p.region})`}</span>}
+          {p.source && <a href={p.source} rel="noopener">Vendor pricing page</a>}
+          <a href={historyUrl}>Price history</a>
+        </div>
+      </section>
+
+      <article class="prose">
+        <Content />
+      </article>
+    </div>
+
+    <aside>
+      <section class="facts-box" aria-labelledby="facts-title">
+        <h2 id="facts-title">Facts</h2>
+        <dl>
+          <dt>License</dt><dd>{d.license === 'proprietary' ? 'Proprietary' : d.license}{d.license !== 'proprietary' && (oss ? ' (open source)' : ' (source-available)')}</dd>
+          <dt>Runs on</dt><dd>{d.platforms.map(platformLabel).join(', ')}</dd>
+          <dt>Self-hostable</dt><dd>{d.self_hostable ? 'Yes' : 'No'}</dd>
+          {d.maintained && (<><dt>Maintained</dt><dd>{MAINTAINED[d.maintained]}</dd></>)}
+          <dt>Telemetry</dt><dd>{TELEMETRY[d.privacy.telemetry]}</dd>
+          <dt>Account</dt><dd>{d.privacy.account_required ? 'Required' : 'Not required'}</dd>
+          <dt>Data stored</dt><dd>{LOCATION[d.privacy.data_location]}</dd>
+          <dt>Categories</dt>
+          <dd>{d.categories.map((c, i) => (<>{i > 0 && ', '}<a href={href(`category/${c}/`)}>{categoryLabel(c)}</a></>))}</dd>
+          {d.tags.length > 0 && (<><dt>Tags</dt><dd>{d.tags.map((t, i) => (<>{i > 0 && ', '}<a href={href(`tag/${t}/`)}>{t}</a></>))}</dd></>)}
+          <dt>Reviewed</dt><dd>{formatDate(d.last_reviewed)}</dd>
+        </dl>
+      </section>
+
+      {relationGroups.length > 0 && (
+        <section class="facts-box" aria-labelledby="related-title">
+          <h2 id="related-title">Related</h2>
+          {relationGroups.map((g) => (
+            <>
+              <h3>{g.title}</h3>
+              <ul>
+                {g.slugs.map((s) => {
+                  const target = bySlug.get(s);
+                  return <li>{target ? <a href={entryHref(s)}>{target.data.name}</a> : <span class="missing" title="No entry yet">{titleFromSlug(s)}</span>}</li>;
+                })}
+              </ul>
+            </>
+          ))}
+        </section>
+      )}
+    </aside>
+  </div>
+</Base>
+
+<script>
+  // Relative age of the price check, computed in the browser so it stays true between builds.
+  const STALE_DAYS = 183;
+  for (const el of document.querySelectorAll<HTMLElement>('[data-checked]')) {
+    const days = Math.floor((Date.now() - Date.parse(el.dataset.checked!)) / 86_400_000);
+    const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+    const ago = days < 45 ? rtf.format(-days, 'day') : days < 548 ? rtf.format(-Math.round(days / 30.4), 'month') : rtf.format(-Math.round(days / 365), 'year');
+    if (days > STALE_DAYS) {
+      el.classList.add('is-stale');
+      el.textContent = `Prices may be outdated, checked ${ago}`;
+    } else {
+      el.textContent = `Prices checked ${ago}`;
+    }
+  }
+</script>

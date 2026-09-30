@@ -1,0 +1,15 @@
+---
+import TermPage from '../../components/TermPage.astro';
+import { getEntries, vocab, type SoftwareEntry } from '../../lib';
+
+export async function getStaticPaths() {
+  const all = await getEntries();
+  return Object.keys(vocab.tags).map((name) => ({
+    params: { name },
+    props: { entries: all.filter((e) => e.data.tags.includes(name)) },
+  }));
+}
+interface Props { entries: SoftwareEntry[] }
+const { name } = Astro.params;
+---
+<TermPage title={`Tagged ${name}`} description={vocab.tags[name!]?.description} entries={Astro.props.entries} filterQuery={`tag=${name}`} />

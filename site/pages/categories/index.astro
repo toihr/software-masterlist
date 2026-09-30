@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getEntries, vocab, categoryTree, categoryLabel, href } from '../../lib';
+
+const all = await getEntries();
+const countCat = (c: string) => all.filter((e) => e.data.categories.includes(c) || e.data.categories.some((x) => vocab.categories[x]?.parent === c)).length;
+const countTag = (t: string) => all.filter((e) => e.data.tags.includes(t)).length;
+const tree = categoryTree();
+const tags = Object.keys(vocab.tags).sort();
+---
+<Base title="Categories and tags">
+  <header class="page-head">
+    <h1>Categories and tags</h1>
+    <p>Every entry has up to four categories and any number of tags. Both come from a fixed vocabulary that is checked on every change.</p>
+  </header>
+  <div class="term-groups">
+    {tree.map((g) => (
+      <section class="term-group">
+        <h2><a href={href(`category/${g.key}/`)}>{categoryLabel(g.key)}</a><span class="n">{countCat(g.key)}</span></h2>
+        <ul>
+          {g.children.map((c) => <li><a href={href(`category/${c}/`)}>{categoryLabel(c)}</a><span class="n">{countCat(c)}</span></li>)}
+        </ul>
+      </section>
+    ))}
+    <section class="term-group">
+      <h2>Tags</h2>
+      <ul>
+        {tags.map((t) => <li><a href={href(`tag/${t}/`)}>{t}</a><span class="n">{countTag(t)}</span></li>)}
+      </ul>
+    </section>
+  </div>
+</Base>

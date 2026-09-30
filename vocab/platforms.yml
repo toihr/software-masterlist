@@ -1,0 +1,24 @@
+# Where the software runs or how it is delivered.
+
+windows:
+  description: Windows desktop app
+  aliases: [win]
+macos:
+  description: macOS desktop app
+  aliases: [mac, osx]
+linux:
+  description: Linux desktop app or binary
+ios:
+  description: iPhone and iPad app
+  aliases: [ipados, iphone]
+android:
+  description: Android app
+web:
+  description: Runs in the browser, nothing to install
+  aliases: [browser, webapp]
+cli:
+  description: Command-line tool
+  aliases: [terminal]
+docker:
+  description: Official container image for self-hosting
+  aliases: [container]

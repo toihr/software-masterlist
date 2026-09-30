@@ -1,0 +1,37 @@
+# Tags: looser than categories, grow freely. Keep them lowercase-kebab-case.
+# Use aliases for common misspellings or synonyms so CI can suggest the right tag.
+
+markdown:
+  description: Stores or edits content as Markdown
+  aliases: [md]
+local-first:
+  description: Data lives on your device by default
+  aliases: [offline-first, local]
+plugins:
+  description: Extensible with community plugins
+  aliases: [extensions, addons]
+e2ee:
+  description: End-to-end encrypted
+  aliases: [end-to-end-encryption, encryption]
+p2p:
+  description: Peer-to-peer, no central server needed
+  aliases: [peer-to-peer]
+outliner:
+  description: Block or bullet based editing
+knowledge-graph:
+  description: Links notes and shows how they connect
+  aliases: [graph, backlinks]
+ocr:
+  description: Recognizes text in images or scans
+machine-learning:
+  description: Uses ML for search, tagging or recognition
+  aliases: [ml, ai]
+browser-extension:
+  description: Offers a browser extension
+collaboration:
+  description: Real-time or shared editing with others
+  aliases: [collab, sharing]
+groupware:
+  description: Bundles mail, calendar, contacts or office tools
+offline:
+  description: Works fully without internet access

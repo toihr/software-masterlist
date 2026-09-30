@@ -1,0 +1,35 @@
+name: Suggest software
+description: Propose a tool for the list
+title: "Add: "
+labels: [suggestion]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What does it do, and why is it worth listing?
+    validations:
+      required: true
+  - type: input
+    id: alternatives
+    attributes:
+      label: What is it an alternative to? (optional)
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the list and it isn't there yet
+          required: true

@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryRow from '../components/EntryRow.astro';
+import {
+  getEntries, vocab, categoryTree, parentsOf, licenseKind, platformLabel, categoryLabel, PRICING_LABEL, titleFromSlug,
+} from '../lib';
+import { PRICING_MODEL } from '../../lib/schema';
+
+const entries = await getEntries();
+const names = new Map(entries.map((e) => [e.data.slug, e.data.name]));
+
+// Compact data for client-side search and filtering.
+const data = entries.map(({ data: d }) => ({
+  slug: d.slug,
+  name: d.name,
+  description: d.description,
+  alternatives: d.relations.alternatives_to.map((s) => names.get(s) ?? titleFromSlug(s)),
+  facets: {
+    category: [...d.categories, ...parentsOf(d.categories)],
+    platform: d.platforms,
+    pricing: [d.pricing.model],
+    license: [licenseKind(d.license)],
+    hosting: d.self_hostable ? ['self-hostable'] : [],
+    tag: d.tags,
+  },
+}));
+
+const used = (key: keyof (typeof data)[number]['facets'], value: string) => data.some((e) => e.facets[key].includes(value));
+const tree = categoryTree()
+  .map((g) => ({ ...g, children: g.children.filter((c) => used('category', c)) }))
+  .filter((g) => used('category', g.key));
+const platforms = Object.keys(vocab.platforms).filter((p) => used('platform', p));
+const models = PRICING_MODEL.filter((m) => used('pricing', m));
+const tags = Object.keys(vocab.tags)
+  .filter((t) => used('tag', t))
+  .sort((a, b) => data.filter((e) => e.facets.tag.includes(b)).length - data.filter((e) => e.facets.tag.includes(a)).length);
+const topTags = tags.slice(0, 12);
+const moreTags = tags.slice(12);
+---
+<Base>
+  <section class="search" role="search">
+    <label for="q">Search {entries.length} tools by name, purpose, or a tool you want to replace</label>
+    <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. dropbox, password, notes" />
+    <p class="hint">Press <kbd>/</kbd> to search from anywhere on the page, <kbd>Esc</kbd> to clear.</p>
+  </section>
+
+  <div class="browse">
+    <details class="filters" id="filters">
+      <summary>Filters</summary>
+      <form id="facets" onsubmit="return false">
+        <fieldset class="facet">
+          <legend>Category</legend>
+          <ul>
+            {tree.map((g) => (
+              <li class="facet-parent">
+                <label><input type="checkbox" name="category" value={g.key} /> {categoryLabel(g.key)} <span class="n" data-count={`category:${g.key}`}></span></label>
+                {g.children.length > 0 && (
+                  <ul>
+                    {g.children.map((c) => (
+                      <li><label><input type="checkbox" name="category" value={c} /> {categoryLabel(c)} <span class="n" data-count={`category:${c}`}></span></label></li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </fieldset>
+        <fieldset class="facet">
+          <legend>Runs on</legend>
+          <ul>
+            {platforms.map((p) => (
+              <li><label><input type="checkbox" name="platform" value={p} /> {platformLabel(p)} <span class="n" data-count={`platform:${p}`}></span></label></li>
+            ))}
+          </ul>
+        </fieldset>
+        <fieldset class="facet">
+          <legend>Pricing</legend>
+          <ul>
+            {models.map((m) => (
+              <li><label><input type="checkbox" name="pricing" value={m} /> {PRICING_LABEL[m]} <span class="n" data-count={`pricing:${m}`}></span></label></li>
+            ))}
+          </ul>
+        </fieldset>
+        <fieldset class="facet">
+          <legend>License and hosting</legend>
+          <ul>
+            <li><label><input type="checkbox" name="license" value="open-source" /> Open source <span class="n" data-count="license:open-source"></span></label></li>
+            <li><label><input type="checkbox" name="license" value="proprietary" /> Proprietary <span class="n" data-count="license:proprietary"></span></label></li>
+            <li><label><input type="checkbox" name="hosting" value="self-hostable" /> Self-hostable <span class="n" data-count="hosting:self-hostable"></span></label></li>
+          </ul>
+        </fieldset>
+        {tags.length > 0 && (
+          <fieldset class="facet">
+            <legend>Tags</legend>
+            <ul>
+              {topTags.map((t) => (
+                <li><label><input type="checkbox" name="tag" value={t} /> {t} <span class="n" data-count={`tag:${t}`}></span></label></li>
+              ))}
+            </ul>
+            {moreTags.length > 0 && (
+              <details>
+                <summary>{moreTags.length} more tags</summary>
+                <ul>
+                  {moreTags.map((t) => (
+                    <li><label><input type="checkbox" name="tag" value={t} /> {t} <span class="n" data-count={`tag:${t}`}></span></label></li>
+                  ))}
+                </ul>
+              </details>
+            )}
+          </fieldset>
+        )}
+      </form>
+    </details>
+
+    <section aria-labelledby="results-count">
+      <div class="results-head">
+        <p id="results-count" aria-live="polite">{entries.length} tools</p>
+        <button type="button" class="link-button" id="clear" hidden>Clear search and filters</button>
+      </div>
+      <ul class="rows" id="rows">
+        {entries.map((e) => <EntryRow entry={e} />)}
+      </ul>
+      <div class="empty" id="empty" hidden>
+        <h2>No tools match</h2>
+        <p>Remove a filter or try a broader search. If something is missing, suggest it on GitHub.</p>
+      </div>
+    </section>
+  </div>
+
+  <script type="application/json" id="entries-data" set:html={JSON.stringify(data)} />
+</Base>
+
+<script>
+  import { initBrowse } from '../scripts/browse';
+  initBrowse();
+</script>

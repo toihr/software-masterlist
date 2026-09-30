@@ -1,0 +1,22 @@
+---
+import TermPage from '../../components/TermPage.astro';
+import { getEntries, vocab, categoryLabel, type SoftwareEntry } from '../../lib';
+
+export async function getStaticPaths() {
+  const all = await getEntries();
+  return Object.keys(vocab.categories).map((name) => ({
+    params: { name },
+    props: { entries: all.filter((e) => e.data.categories.includes(name) || e.data.categories.some((c) => vocab.categories[c]?.parent === name)) },
+  }));
+}
+interface Props { entries: SoftwareEntry[] }
+const { name } = Astro.params;
+const item = vocab.categories[name!];
+const parent = item?.parent;
+const children = Object.keys(vocab.categories).filter((c) => vocab.categories[c]?.parent === name);
+const related = [
+  ...(parent ? [{ label: categoryLabel(parent), path: `category/${parent}/` }] : []),
+  ...children.map((c) => ({ label: categoryLabel(c), path: `category/${c}/` })),
+];
+---
+<TermPage title={categoryLabel(name!)} description={item?.description} entries={Astro.props.entries} filterQuery={`category=${name}`} related={related} />

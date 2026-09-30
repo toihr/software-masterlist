@@ -1,0 +1,61 @@
+# Categories: strict and few (aim for 20–40). Top-level entries are groups,
+# children set `parent`. Entries may use either. Max 4 per entry.
+# Add new ones in the same PR as the entry that needs them.
+
+productivity:
+  description: Getting work organized and done
+note-taking:
+  parent: productivity
+  description: Writing, organizing and linking notes
+  aliases: [notes, notetaking, knowledge-base, pkm]
+task-management:
+  parent: productivity
+  description: To-do lists, projects and planning
+  aliases: [todo, tasks]
+
+files:
+  description: Storing, moving and organizing files
+file-sync:
+  parent: files
+  description: Keeping files identical across devices
+  aliases: [sync, syncing]
+cloud-storage:
+  parent: files
+  description: Hosted or self-hosted file storage with sharing
+  aliases: [cloud]
+backup:
+  parent: files
+  description: Copies of data for recovery
+  aliases: [backups]
+document-management:
+  parent: files
+  description: Scanning, archiving and searching documents
+  aliases: [dms, paperless]
+
+media:
+  description: Photos, video, audio and books
+photo-management:
+  parent: media
+  description: Organizing, browsing and backing up photos
+  aliases: [photos, gallery]
+
+security:
+  description: Protecting accounts, data and devices
+password-manager:
+  parent: security
+  description: Storing and generating credentials
+  aliases: [passwords, password-management]
+
+development:
+  description: Tools for building software
+code-editor:
+  parent: development
+  description: Editors and IDEs
+  aliases: [editor, ide]
+
+communication:
+  description: Messaging, mail and calls
+
+system:
+  description: Operating system tools and utilities
+  aliases: [utilities, utility]
