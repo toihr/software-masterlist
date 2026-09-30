@@ -35,3 +35,6 @@ groupware:
   description: Bundles mail, calendar, contacts or office tools
 offline:
   description: Works fully without internet access
+desktop-search:
+  description: Searches files on the local machine or network shares
+  aliases: [file-search, search]
