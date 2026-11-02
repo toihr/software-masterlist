@@ -12,12 +12,12 @@ self_hostable: false
 maintained: active
 relations:
   alternatives_to: []
-  integrates_with: [open-geotechniek-studio]
+  integrates_with: []
   fork_of:
 privacy:
-  telemetry: none
-  account_required: false
-  data_location: local
+  telemetry: unknown
+  account_required: unknown
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -46,7 +46,7 @@ An alpha-stage engineering app from the OpenAEC Foundation. It combines load poi
 - Development is AI-assisted with human review
 
 ## Compared to Alternatives
-- Pile design is usually done in proprietary or spreadsheet tools; this is open and optimises across a whole plan.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/pile-plan-studio)

@@ -11,7 +11,7 @@ license: Apache-2.0
 self_hostable: false
 maintained: active
 relations:
-  alternatives_to: [microsoft-office, libreoffice]
+  alternatives_to: []
   integrates_with: []
   fork_of:
 privacy:
@@ -43,7 +43,7 @@ An office suite from the OpenAEC Foundation that runs entirely on your computer,
 - Project page is inconsistent about whether the app checks for updates
 
 ## Compared to Alternatives
-- **LibreOffice:** far more mature and complete; this focuses on Office formats and is much younger.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/open-office-studio)

@@ -32,8 +32,8 @@ const relationGroups = [
 ].filter((g) => g.slugs.length);
 
 const oss = licenseKind(d.license) === 'open-source';
-const TELEMETRY: Record<string, string> = { none: 'None', 'opt-in': 'Opt-in', 'opt-out': 'On by default, can be turned off', mandatory: 'Always on' };
-const LOCATION: Record<string, string> = { local: 'On your device', 'self-chosen': 'Wherever you host it', EU: 'EU', US: 'US', global: 'Worldwide' };
+const TELEMETRY: Record<string, string> = { none: 'None', 'opt-in': 'Opt-in', 'opt-out': 'On by default, can be turned off', mandatory: 'Always on', unknown: 'Not documented' };
+const LOCATION: Record<string, string> = { local: 'On your device', 'self-chosen': 'Wherever you host it', EU: 'EU', US: 'US', global: 'Worldwide', unknown: 'Not documented' };
 const MAINTAINED: Record<string, string> = { active: 'Active', slow: 'Slow', 'feature-complete': 'Feature-complete', abandoned: 'Abandoned', discontinued: 'Discontinued' };
 const p = d.pricing;
 ---
@@ -93,12 +93,12 @@ const p = d.pricing;
       <section class="facts-box" aria-labelledby="facts-title">
         <h2 id="facts-title">Facts</h2>
         <dl>
-          <dt>License</dt><dd>{d.license === 'proprietary' ? 'Proprietary' : d.license}{d.license !== 'proprietary' && (oss ? ' (open source)' : ' (source-available)')}</dd>
+          <dt>License</dt><dd>{d.license === 'proprietary' ? 'Proprietary' : d.license === 'unknown' ? 'Not documented' : d.license}{d.license !== 'proprietary' && d.license !== 'unknown' && (oss ? ' (open source)' : ' (source-available)')}</dd>
           <dt>Runs on</dt><dd>{d.platforms.map(platformLabel).join(', ')}</dd>
           <dt>Self-hostable</dt><dd>{d.self_hostable ? 'Yes' : 'No'}</dd>
           {d.maintained && (<><dt>Maintained</dt><dd>{MAINTAINED[d.maintained]}</dd></>)}
           <dt>Telemetry</dt><dd>{TELEMETRY[d.privacy.telemetry]}</dd>
-          <dt>Account</dt><dd>{d.privacy.account_required ? 'Required' : 'Not required'}</dd>
+          <dt>Account</dt><dd>{d.privacy.account_required === 'unknown' ? 'Not documented' : d.privacy.account_required ? 'Required' : 'Not required'}</dd>
           <dt>Data stored</dt><dd>{LOCATION[d.privacy.data_location]}</dd>
           <dt>Categories</dt>
           <dd>{d.categories.map((c, i) => (<>{i > 0 && ', '}<a href={href(`category/${c}/`)}>{categoryLabel(c)}</a></>))}</dd>

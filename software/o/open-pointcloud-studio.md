@@ -11,13 +11,13 @@ license: GPL-3.0-only
 self_hostable: false
 maintained: active
 relations:
-  alternatives_to: [cloudcompare]
+  alternatives_to: []
   integrates_with: []
   fork_of:
 privacy:
-  telemetry: none
-  account_required: false
-  data_location: local
+  telemetry: unknown
+  account_required: unknown
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -44,7 +44,7 @@ A desktop point cloud tool from the OpenAEC Foundation, written in Rust. It hand
 - Telemetry is not documented
 
 ## Compared to Alternatives
-- **CloudCompare:** older and broader for point cloud analysis; this adds drawing and IFC output for building work.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/open-pointcloud-studio)

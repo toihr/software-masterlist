@@ -12,12 +12,12 @@ self_hostable: true
 maintained: active
 relations:
   alternatives_to: []
-  integrates_with: [open-pdf-studio]
+  integrates_with: []
   fork_of:
 privacy:
-  telemetry: none
-  account_required: false
-  data_location: local
+  telemetry: unknown
+  account_required: unknown
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -42,7 +42,7 @@ A cost estimating program for the construction sector from the OpenAEC Foundatio
 - Telemetry of the desktop app is not documented
 
 ## Compared to Alternatives
-- Few open-source estimating tools exist; this one targets Dutch and European exchange formats.
+- None documented by the project.
 
 ## Resources
 - [Repository and docs](https://github.com/OpenAEC-Foundation/open-calc-studio)

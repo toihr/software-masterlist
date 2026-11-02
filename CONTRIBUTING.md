@@ -15,6 +15,10 @@
 - `description` is one sentence under 160 characters.
 - Keep entries short. Link to the vendor's docs rather than copying them.
 
+## Unknown facts
+
+Never guess. If the vendor doesn't document `license`, `telemetry`, `account_required` or `data_location`, set it to `unknown`. Leave `maintained` out unless you can back it up (e.g. recent releases), and only add relations the vendor states or you have verified.
+
 ## Pricing
 
 - Copy prices from the vendor's own pricing page and set `pricing.checked` to the day you looked.

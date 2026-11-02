@@ -9,15 +9,14 @@ tags: [aec, geotechnical]
 platforms: [windows, linux]
 license: MIT
 self_hostable: false
-maintained: active
 relations:
   alternatives_to: []
-  integrates_with: [open-pile-plan-studio]
+  integrates_with: []
   fork_of:
 privacy:
-  telemetry: none
-  account_required: false
-  data_location: local
+  telemetry: unknown
+  account_required: unknown
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -44,7 +43,7 @@ A tool from the OpenAEC Foundation for working with cone penetration tests and b
 - Dutch data sources only
 
 ## Compared to Alternatives
-- Commercial geotechnical suites cover more calculations; this is a free viewer and drawing tool.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/open-geotechniek-studio)

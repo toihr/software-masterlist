@@ -11,13 +11,13 @@ license: LGPL-3.0-only
 self_hostable: false
 maintained: active
 relations:
-  alternatives_to: [bluebeam-revu, adobe-acrobat]
+  alternatives_to: []
   integrates_with: []
   fork_of:
 privacy:
   telemetry: none
-  account_required: false
-  data_location: local
+  account_required: unknown
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -43,7 +43,7 @@ A PDF viewer and annotator from the OpenAEC Foundation aimed at construction wor
 - Contacts external hosts for updates, symbol library and an optional OpenAEC sign-in; whether sign-in is required is not stated
 
 ## Compared to Alternatives
-- **Bluebeam Revu / Adobe Acrobat:** proprietary and paid; this is free but younger.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/open-pdf-studio)

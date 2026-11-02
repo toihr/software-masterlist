@@ -11,13 +11,13 @@ license: LGPL-3.0-only
 self_hostable: false
 maintained: active
 relations:
-  alternatives_to: [ms-project, primavera-p6]
+  alternatives_to: []
   integrates_with: []
   fork_of:
 privacy:
-  telemetry: none
+  telemetry: unknown
   account_required: false
-  data_location: local
+  data_location: unknown
 pricing:
   model: free
   checked: 2026-11-02
@@ -43,7 +43,7 @@ A scheduling application for construction projects from the OpenAEC Foundation. 
 - Telemetry behaviour is not documented on the project page
 
 ## Compared to Alternatives
-- **Microsoft Project / Primavera P6:** proprietary and paid; this reads their files but cannot write .mpp or .xer.
+- None documented by the project.
 
 ## Resources
 - [Repository](https://github.com/OpenAEC-Foundation/open-planner-studio)
