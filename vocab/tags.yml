@@ -38,3 +38,22 @@ offline:
 desktop-search:
   description: Searches files on the local machine or network shares
   aliases: [file-search, search]
+
+ifc:
+  description: Reads or writes IFC (Industry Foundation Classes) building data
+  aliases: [bim-ifc]
+mcp:
+  description: Offers a Model Context Protocol server for AI assistants
+  aliases: [model-context-protocol]
+aec:
+  description: Built for architecture, engineering and construction work
+  aliases: [construction, bim]
+geotechnical:
+  description: Soil investigation and foundation engineering
+  aliases: [geotechnics, foundation]
+point-clouds:
+  description: Works with laser scans and 3D survey data
+  aliases: [laser-scanning]
+cost-estimating:
+  description: Builds cost estimates or quotes
+  aliases: [estimating]

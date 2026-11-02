@@ -33,7 +33,7 @@ document-management:
   aliases: [dms, paperless]
 
 media:
-  description: Photos, video, audio and books
+  description: Photos, video, audio, books and images
 photo-management:
   parent: media
   description: Organizing, browsing and backing up photos
@@ -59,3 +59,18 @@ communication:
 system:
   description: Operating system tools and utilities
   aliases: [utilities, utility]
+
+cad:
+  description: Drawing, modelling and working with CAD and 3D data
+  aliases: [cad-3d, drafting, 3d]
+calculation:
+  description: Numeric, symbolic and engineering calculation, e.g. MATLAB, Mathematica, Mathcad, cost estimating
+  aliases: [math, engineering, estimating, computation]
+office-suite:
+  parent: productivity
+  description: Word processing, spreadsheets and presentations
+  aliases: [office]
+pdf-tools:
+  parent: files
+  description: Viewing, annotating and editing PDF files
+  aliases: [pdf]

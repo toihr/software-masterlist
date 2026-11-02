@@ -11,7 +11,7 @@ const oss = licenseKind(data.license) === 'open-source';
   </div>
   <div class="meta">
     <strong>{priceSummary(data.pricing)}</strong>
-    {oss ? 'Open source' : 'Proprietary'}{data.self_hostable && ', self-hostable'}
+    {data.license === 'unknown' ? 'License unknown' : oss ? 'Open source' : 'Proprietary'}{data.self_hostable && ', self-hostable'}
   </div>
   <div class="facts">
     <span>

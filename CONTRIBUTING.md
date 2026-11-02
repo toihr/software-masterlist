@@ -15,6 +15,10 @@
 - `description` is one sentence under 160 characters.
 - Keep entries short. Link to the vendor's docs rather than copying them.
 
+## Unknown facts
+
+Never guess. If the vendor doesn't document `license`, `telemetry`, `account_required` or `data_location`, set it to `unknown`. Leave `maintained` out unless you can back it up (e.g. recent releases), and only add relations the vendor states or you have verified.
+
 ## Pricing
 
 - Copy prices from the vendor's own pricing page and set `pricing.checked` to the day you looked.
@@ -29,6 +33,10 @@
 ## Categories and tags
 
 Both are controlled vocabularies in `vocab/`. Validation fails on unknown values and suggests the closest match.
+
+- **Category = what the software is or does** (its function): `password-manager`, `file-sync`, `cad`, `pdf-tools`. Ask "what kind of tool is this?". Pick broad ones that many entries could share.
+- **Tag = a trait or context**: an industry or domain (`aec`, `geotechnical`), a format (`ifc`, `markdown`), or a property (`local-first`, `mcp`, `ocr`). Ask "what else is notable about it?".
+- Industry or domain names are tags, not categories. If a category would hold only one or two entries, it is probably a tag.
 
 - **Categories** are few and stable. A new one needs a short reason in the PR description. Children set `parent`; only one level of nesting.
 - **Tags** can be added freely, as long as no existing tag already covers it.

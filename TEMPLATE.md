@@ -7,7 +7,7 @@ description: One sentence, under 160 characters, saying what it does.
 categories: [note-taking]        # 1–4, from vocab/categories.yml
 tags: []                         # from vocab/tags.yml
 platforms: [windows, macos, linux]  # from vocab/platforms.yml
-license: MIT                     # SPDX expression or "proprietary"
+license: MIT                     # SPDX expression, "proprietary", or "unknown" if not documented
 self_hostable: false
 maintained: active               # active | slow | feature-complete | abandoned | discontinued
 relations:
@@ -15,9 +15,9 @@ relations:
   integrates_with: []
   fork_of:
 privacy:
-  telemetry: none                # none | opt-in | opt-out | mandatory
-  account_required: false
-  data_location: local           # local | self-chosen | EU | US | global
+  telemetry: none                # none | opt-in | opt-out | mandatory | unknown
+  account_required: false        # true | false | unknown
+  data_location: local           # local | self-chosen | EU | US | global | unknown
 pricing:
   model: freemium                # free | freemium | one-time | subscription | usage-based | contact
   currency: EUR                  # ISO 4217, required if any price > 0

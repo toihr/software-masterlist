@@ -70,7 +70,7 @@ export const PRICING_LABEL: Record<Pricing['model'], string> = {
   contact: 'Price on request',
 };
 
-export const licenseKind = (license: string) => (isOpenSource(license) ? 'open-source' : 'proprietary');
+export const licenseKind = (license: string) => (license === 'unknown' ? 'unknown' : isOpenSource(license) ? 'open-source' : 'proprietary');
 
 export function platformLabel(p: string) {
   const labels: Record<string, string> = { windows: 'Windows', macos: 'macOS', linux: 'Linux', ios: 'iOS', android: 'Android', web: 'Web', cli: 'CLI', docker: 'Docker' };

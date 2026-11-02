@@ -7,8 +7,8 @@ import { parseLicense } from './license';
 export const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 export const MAINTAINED = ['active', 'slow', 'feature-complete', 'abandoned', 'discontinued'] as const;
-export const TELEMETRY = ['none', 'opt-in', 'opt-out', 'mandatory'] as const;
-export const DATA_LOCATION = ['local', 'self-chosen', 'EU', 'US', 'global'] as const;
+export const TELEMETRY = ['none', 'opt-in', 'opt-out', 'mandatory', 'unknown'] as const;
+export const DATA_LOCATION = ['local', 'self-chosen', 'EU', 'US', 'global', 'unknown'] as const;
 export const PRICING_MODEL = ['free', 'freemium', 'one-time', 'subscription', 'usage-based', 'contact'] as const;
 export const PRICE_UNIT = ['flat', 'user', 'device', 'seat', 'site'] as const;
 export const PERIOD = ['month', 'year', 'once'] as const;
@@ -83,7 +83,7 @@ export function buildEntrySchema(vocab: Vocab) {
       .prefault({}),
     privacy: z.strictObject({
       telemetry: z.enum(TELEMETRY),
-      account_required: z.boolean(),
+      account_required: z.union([z.boolean(), z.literal('unknown')]),
       data_location: z.enum(DATA_LOCATION),
     }),
     pricing,
