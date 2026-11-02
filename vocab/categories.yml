@@ -59,3 +59,27 @@ communication:
 system:
   description: Operating system tools and utilities
   aliases: [utilities, utility]
+
+aec:
+  description: Architecture, engineering and construction
+  aliases: [construction, bim, civil-engineering]
+construction-planning:
+  parent: aec
+  description: Scheduling and cost estimating for construction projects
+  aliases: [scheduling, cost-estimating]
+geotechnical:
+  parent: aec
+  description: Soil investigation and foundation engineering
+  aliases: [geotechnics, foundation]
+point-clouds:
+  parent: aec
+  description: Viewing and processing laser scans and 3D survey data
+  aliases: [laser-scanning, 3d-scanning]
+office-suite:
+  parent: productivity
+  description: Word processing, spreadsheets and presentations
+  aliases: [office]
+pdf-tools:
+  parent: files
+  description: Viewing, annotating and editing PDF files
+  aliases: [pdf]
