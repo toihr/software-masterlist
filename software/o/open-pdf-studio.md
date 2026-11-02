@@ -4,8 +4,8 @@ slug: open-pdf-studio
 website: https://open-aec.com/open-pdf-studio
 repo: https://github.com/OpenAEC-Foundation/open-pdf-studio
 description: Free PDF editor and annotator with measurement, takeoff, DWG/DXF import, signature validation and OCR.
-categories: [pdf-tools, aec]
-tags: [cad, ocr, mcp]
+categories: [pdf-tools, cad]
+tags: [aec, ocr, mcp]
 platforms: [windows, macos, linux, android]
 license: LGPL-3.0-only
 self_hostable: false

@@ -45,6 +45,15 @@ ifc:
 mcp:
   description: Offers a Model Context Protocol server for AI assistants
   aliases: [model-context-protocol]
-cad:
-  description: Reads, writes or edits CAD drawings such as DXF and DWG
-  aliases: [dxf, dwg]
+aec:
+  description: Built for architecture, engineering and construction work
+  aliases: [construction, bim]
+geotechnical:
+  description: Soil investigation and foundation engineering
+  aliases: [geotechnics, foundation]
+point-clouds:
+  description: Works with laser scans and 3D survey data
+  aliases: [laser-scanning]
+cost-estimating:
+  description: Builds cost estimates or quotes
+  aliases: [estimating]

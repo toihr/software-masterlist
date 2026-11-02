@@ -4,8 +4,8 @@ slug: open-planner-studio
 website: https://open-aec.com/open-planner-studio/
 repo: https://github.com/OpenAEC-Foundation/open-planner-studio
 description: Open-source construction scheduling with critical path calculation, MS Project and Primavera P6 import, and IFC 4.3 storage.
-categories: [construction-planning, task-management]
-tags: [ifc, mcp]
+categories: [task-management]
+tags: [aec, ifc, mcp]
 platforms: [web, windows, macos, linux]
 license: LGPL-3.0-only
 self_hostable: false

@@ -4,8 +4,8 @@ slug: open-calc-studio
 website: https://github.com/OpenAEC-Foundation/open-calc-studio
 repo: https://github.com/OpenAEC-Foundation/open-calc-studio
 description: Open-source construction cost estimating with IFC quantity takeoff, BC3, GAEB and CUF/RSX import, for desktop, browser and embedding.
-categories: [construction-planning]
-tags: [ifc, mcp]
+categories: [calculation]
+tags: [aec, cost-estimating, ifc, mcp]
 platforms: [web, windows, macos, linux, docker]
 license: LGPL-3.0-only
 self_hostable: true

@@ -4,8 +4,8 @@ slug: open-geotechniek-studio
 website: https://github.com/OpenAEC-Foundation/open-geotechniek-studio
 repo: https://github.com/OpenAEC-Foundation/open-geotechniek-studio
 description: "Desktop app for Dutch geotechnical work: view CPT (GEF, BRO-XML) and borehole data, map them and draw site situations."
-categories: [geotechnical]
-tags: [cad]
+categories: [calculation, cad]
+tags: [aec, geotechnical]
 platforms: [windows, linux]
 license: MIT
 self_hostable: false

@@ -4,8 +4,8 @@ slug: open-pile-plan-studio
 website: https://open-aec.com/open-pile-plan-studio
 repo: https://github.com/OpenAEC-Foundation/pile-plan-studio
 description: Open-source tool to compare pile options and optimise a pile plan for structural load points using CPT data.
-categories: [geotechnical]
-tags: [mcp]
+categories: [calculation]
+tags: [aec, geotechnical, mcp]
 platforms: [web, windows]
 license: LGPL-3.0-or-later
 self_hostable: false

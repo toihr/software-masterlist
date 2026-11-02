@@ -30,6 +30,10 @@
 
 Both are controlled vocabularies in `vocab/`. Validation fails on unknown values and suggests the closest match.
 
+- **Category = what the software is or does** (its function): `password-manager`, `file-sync`, `cad`, `pdf-tools`. Ask "what kind of tool is this?". Pick broad ones that many entries could share.
+- **Tag = a trait or context**: an industry or domain (`aec`, `geotechnical`), a format (`ifc`, `markdown`), or a property (`local-first`, `mcp`, `ocr`). Ask "what else is notable about it?".
+- Industry or domain names are tags, not categories. If a category would hold only one or two entries, it is probably a tag.
+
 - **Categories** are few and stable. A new one needs a short reason in the PR description. Children set `parent`; only one level of nesting.
 - **Tags** can be added freely, as long as no existing tag already covers it.
 - Add new values in the same PR as the entry that uses them, with a `description`, and `aliases` for common synonyms.

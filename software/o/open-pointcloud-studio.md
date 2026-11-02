@@ -4,8 +4,8 @@ slug: open-pointcloud-studio
 website: https://github.com/OpenAEC-Foundation/open-pointcloud-studio
 repo: https://github.com/OpenAEC-Foundation/open-pointcloud-studio
 description: Rust desktop app for viewing, measuring, editing and converting laser scans, with section drawings and mesh export.
-categories: [point-clouds, aec]
-tags: [cad, ifc, mcp]
+categories: [cad]
+tags: [aec, point-clouds, ifc, mcp]
 platforms: [windows, macos, linux, cli]
 license: GPL-3.0-only
 self_hostable: false
