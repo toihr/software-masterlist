@@ -64,8 +64,8 @@ cad:
   description: Drawing, modelling and working with CAD and 3D data
   aliases: [cad-3d, drafting, 3d]
 calculation:
-  description: Estimating, engineering and numeric calculation tools
-  aliases: [engineering, estimating]
+  description: Numeric, symbolic and engineering calculation, e.g. MATLAB, Mathematica, Mathcad, cost estimating
+  aliases: [math, engineering, estimating, computation]
 office-suite:
   parent: productivity
   description: Word processing, spreadsheets and presentations
