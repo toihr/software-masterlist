@@ -4,7 +4,7 @@ slug: open-paint-studio
 website: https://github.com/OpenAEC-Foundation/open-paint-studio
 repo: https://github.com/OpenAEC-Foundation/open-paint-studio
 description: "Small MS Paint-style image editor with editable vector objects, a local API and an MCP server, in the browser or on desktop."
-categories: [image-editing]
+categories: [media]
 tags: [aec, mcp]
 platforms: [web, windows, macos, linux]
 license: MIT

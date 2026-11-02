@@ -33,7 +33,7 @@ document-management:
   aliases: [dms, paperless]
 
 media:
-  description: Photos, video, audio and books
+  description: Photos, video, audio, books and images
 photo-management:
   parent: media
   description: Organizing, browsing and backing up photos
@@ -60,10 +60,6 @@ system:
   description: Operating system tools and utilities
   aliases: [utilities, utility]
 
-image-editing:
-  parent: media
-  description: Editing and drawing raster and vector images
-  aliases: [image-editor, paint]
 cad:
   description: Drawing, modelling and working with CAD and 3D data
   aliases: [cad-3d, drafting, 3d]
